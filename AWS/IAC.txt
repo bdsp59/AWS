@@ -1,0 +1,28 @@
+IAC
+
+Infraestrutura como código, usado para escrever e executar um código que:
+	- Definir;
+	- Implementar;
+	- Atualizar;
+	- Gerenciar;
+
+O terraform seria uma ferramenta para criar um script em uma linguagem especifíca do Terraform, depois o Terraform faz a transformação para que o script se adapte a qualquer cloud (AWS, Azure ou Google Cloud).
+
+Benefícios do IAC:
+	- Deploy Automatizado -> Deploy mais rápido e mais seguro;
+	- Controle de Versão -> Comparar e voltar a versões é fácil;
+	- Velocidade e Segurança -> Como utilizamos o mesmo arquivo se torna fácil a sua leitura e alteração;
+	- Reuso -> Reutiliza os blocos de código para agilizar o processo;
+
+Para iniciar um arquivo no terraform usamos os comandos:
+	1- terraform init -> Inicia o terraform e cria as primeiras estruturas para se comunicar com a AWS.
+	2- terraform plan -> Monta a instância que criamos, mas somente vamos ter a acesso a informações quando criarmos a nossa máquina virtual.
+	3- terraform apply -> Vamos usar esse comando para aplicar a nossa instância.
+
+Para acessar a nossa máquina virtual temos que:
+	1- Criar um par de chaves de segurança => Criamos esse par de chaves no próprio site da AWS, criamos um nome e se formos usar o SSH, que é o caso, escolhemos o tipo .pem.
+	2- Inserir o par de chaves no nosso arquivo, dentro da parte de recursos (key_name="nomeParChaves").
+	3- Executar o comando "chmod 400 id_rsa" (Esse comando garante que apenas pessoas autorizadas possam ver esse par de chaves). No windows, icacls bruno_ohio.pem /grant b_pro:"(RX)"
+	4- Acessar o Security Group, para editar as regras de entrada e de saída.
+		4.1- Entrada -> Todo o tráfego de IPV4 e IPV6.
+		4.2- Saída -> Todo o tráfego de IPV4 e IPV6.
